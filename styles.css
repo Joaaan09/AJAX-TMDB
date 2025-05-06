@@ -1,0 +1,116 @@
+/*ESTILOS BUSCADOR */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #644bff;
+  padding: 0 20px;
+}
+
+a {
+    text-decoration: none; /* Elimina el subrayado */
+    color: inherit; /* Mantiene el color del texto del contenedor */
+}
+
+::selection {
+  color: #fff;
+  background: #664aff;
+}
+
+.wrapper {
+  max-width: 450px;
+  margin: 150px auto;
+}
+
+.wrapper .search-input {
+  background: #fff;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+}
+
+.search-input input {
+  height: 55px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0 60px 0 20px;
+  font-size: 18px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input.active input {
+  border-radius: 5px 5px 0 0;
+}
+
+/* Cambiar .autocom-box por #autocom-box para que coincida con el ID en el HTML */
+.search-input #autocom-box {
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.search-input.active #autocom-box {
+  padding: 10px 8px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#autocom-box li {
+  list_style: none;
+  padding: 8px 12px;
+  display: none;
+  width: 100%;
+  cursor: default;
+  border-radius: 3px;
+}
+
+.search-input.active #autocom-box li {
+  display: block;
+}
+
+/* Añadir estilos mejorados para la lista de autocompletado */
+#autocom-box {
+  background: #fff;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+#autocom-box li {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 16px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+#autocom-box li:last-child {
+  border-bottom: none;
+}
+
+#autocom-box li:hover {
+  background: #644bff;
+  color: #fff;
+}
+
+.search-input .icon {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 55px;
+  width: 55px;
+  text-align: center;
+  line-height: 55px;
+  font-size: 20px;
+  color: #644bff;
+  cursor: pointer;
+}
