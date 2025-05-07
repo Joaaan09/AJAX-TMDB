@@ -56,15 +56,17 @@ const datosPelis = {
   
       boton.addEventListener("click", () => {
         tarjetas.innerHTML = ""
-        const wrapper = document.querySelector(".wrapper")
-        wrapper.classList.add("has-results") // Añadir esta línea
+        const wrapper = document.querySelector(".wrapper");
+        wrapper.classList.add("has-results");
   
         filtrar.forEach((peli) => {
-          const img = document.createElement("img")
-          const enlaceIMG = document.createElement("a")
-  
+          const img = document.createElement("img");
+          const enlaceIMG = document.createElement("a");
+          const info = document.createElement("p");
+
           img.src = `https://image.tmdb.org/t/p/w500${peli.poster_path}`
           img.alt = peli.original_title // Añadir texto alternativo para accesibilidad
+          info.innerHTML = peli.original_title + "<br>" + peli.release_date;
   
           enlaceIMG.href = `https://www.imdb.com/es-es/title/${peli.imdb_id}`
           enlaceIMG.target = "_blank" // Abre en una nueva pestaña
@@ -72,6 +74,7 @@ const datosPelis = {
   
           enlaceIMG.appendChild(img)
           tarjetas.appendChild(enlaceIMG)
+          enlaceIMG.appendChild(info);
         })
       })
     })

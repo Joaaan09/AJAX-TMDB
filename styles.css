@@ -150,6 +150,11 @@ a {
   background-color: #fff;
   position: relative;
   padding: 10px;
+  height: fit-content;
+}
+
+.tarjetas p {
+  margin-top: 1px;
 }
 
 .tarjetas a:hover {
