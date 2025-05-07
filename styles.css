@@ -13,8 +13,8 @@ body {
 }
 
 a {
-    text-decoration: none; /* Elimina el subrayado */
-    color: inherit; /* Mantiene el color del texto del contenedor */
+  text-decoration: none; /* Elimina el subrayado */
+  color: inherit; /* Mantiene el color del texto del contenedor */
 }
 
 ::selection {
@@ -25,6 +25,7 @@ a {
 .wrapper {
   max-width: 450px;
   margin: 150px auto;
+  transition: max-width 0.3s ease;
 }
 
 .wrapper .search-input {
@@ -111,6 +112,65 @@ a {
   text-align: center;
   line-height: 55px;
   font-size: 20px;
-  color: #644bff;
+  color: #fff;
+  background-color: white;
   cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.search-input .icon:hover {
+  background-color: #daf73a;
+}
+
+.search-input .icon:active {
+  background-color: #daf73a;
+  transform: scale(0.97);
+}
+
+/* ESTILOS PARA LAS TARJETAS DE PELÍCULAS */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+.tarjetas a {
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  position: relative;
+  padding: 10px;
+}
+
+.tarjetas a:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tarjetas img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.3s ease;
+  border-radius: 4px;
+}
+
+.tarjetas a:hover img {
+  filter: brightness(1.1);
+}
+
+/* Cuando hay resultados, expandir el wrapper */
+.wrapper.has-results {
+  max-width: 1200px;
 }
