@@ -27,6 +27,23 @@ a {
   margin: 150px auto;
   transition: max-width 0.3s ease;
 }
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  padding: 10px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-in-out;
+}
 
 .wrapper .search-input {
   background: #fff;
@@ -131,7 +148,7 @@ a {
 /* ESTILOS PARA LAS TARJETAS DE PELÍCULAS */
 .tarjetas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
   margin-top: 30px;
   width: 100%;
@@ -151,6 +168,7 @@ a {
   position: relative;
   padding: 10px;
   height: fit-content;
+  width: 300px;
 }
 
 .tarjetas p {
