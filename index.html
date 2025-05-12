@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie DataBase</title> 
+    <title>Movie DataBase</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body> 
+
+<body>
     <div class="wrapper">
-      <h1>Buscador de pel·lícules</h1>
+        <h1>Buscador de pel·lícules</h1>
         <div class="search-input">
-          <a href="" target="_blank" hidden></a>
-          <input class="buscador" type="text" placeholder="Busca una pel·lícula">
-          <ul id="autocom-box">
-          </ul>
-          <button class="icon">🔎</button>
-          <div class="tarjetas">
-            
-          </div>
+            <input class="buscador" type="text" placeholder="Busca una pel·lícula">
+            <div class="search-results">
+                <!-- Contenedor para el spinner y resultados -->
+                <div class="spinner-container">
+                    <div class="spinner">
+                        <div class="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <ul id="autocom-box"></ul>
+            </div>
+            <button class="icon">🔎</button>
         </div>
-      </div>
+        <div class="tarjetas"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
