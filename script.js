@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const tarjetas = document.querySelector(".tarjetas")
   const spinner = document.querySelector('.spinner')
 
-  // Variable para almacenar los últimos resultados
+  // Variable per emmagatzemar els últims resultats de cerca
   let ultimosResultados = []
 
-  // Evento de input con debounce para evitar muchas llamadas a la API
+  // Event d'input amb un delay per evitar masses crides a l'API
   let timeout
   buscador.addEventListener("input", async () => {
     clearTimeout(timeout)
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         spinner.style.display = 'none'
 
-        // Mostrar resultados en el autocompletar
+        // Mostrar resultats a l'autocompletar
         ultimosResultados.forEach((peli) => {
           const item = document.createElement("li")
           const enlace = document.createElement("a")
@@ -64,10 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error('Error:', error)
         spinner.style.display = 'none'
       }
-    }, 300) // Espera 300ms después de dejar de escribir
+    }, 200) // Espera 200ms després de deixar d'escriure
   })
 
-  // Evento del botón fuera del input
+  // Event del botó de cerca
   boton.addEventListener("click", async () => {
     const texto = buscador.value.toLowerCase()
     if (texto.length < 1) return
@@ -76,16 +76,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const wrapper = document.querySelector(".wrapper")
     wrapper.classList.add("has-results")
     
-    // Usamos los últimos resultados ya cargados
+    // Utilitza els últims resultats ja carregats
     if (ultimosResultados.length === 0) {
-      // Si no hay resultados recientes, hacemos nueva búsqueda
+      // Si no hi ha resultats recents, fem una nova cerca
       const data = await cargarPeliculas(texto)
       ultimosResultados = data.results.filter((peli) =>
         peli.original_title.toLowerCase().includes(texto)
       )
     }
 
-    // Mostrar resultados en las tarjetas
+    // Mostrar resultats a les targetes
     ultimosResultados.forEach((peli) => {
       const img = document.createElement("img")
       const enlaceIMG = document.createElement("a")
@@ -97,9 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
       img.alt = peli.original_title
       info.innerHTML = `
         <h2>${peli.original_title}</h2>
-        <br> 🗓️ ${peli.release_date || 'Fecha no disponible'}
-        <br> 🎬 ${peli.genereId || 'Género no disponible'}
-        <br> 👥 ${peli.actores || 'Actores no disponibles'}
+        <br> 🗓️ ${peli.release_date || 'Data no disponible'}
+        <br> 🎬 ${peli.genereId || 'Gènere no disponible'}
+        <br> 👥 ${peli.actores || 'Actors no disponibles'}
       `
 
       enlaceIMG.href = peli.imdb_id 
@@ -113,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
+  // Funció per carregar dades de pel·lícules des de l'API
   async function cargarPeliculas(query) {
     try {
       const res = await fetch(
@@ -121,9 +122,10 @@ document.addEventListener("DOMContentLoaded", () => {
       )
       const data = await res.json()
 
+      // Obtenir dades addicionals (IMDB ID, gèneres, actors)
       for (const peli of data.results) {
         try {
-          // Obtener IMDB ID
+          // Obtenir l'ID d'IMDB
           const externalRes = await fetch(
             `https://api.themoviedb.org/3/movie/${peli.id}/external_ids`,
             datosPelis
@@ -131,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const externalData = await externalRes.json()
           peli.imdb_id = externalData.imdb_id
 
-          // Obtener géneros
+          // Obtenir gèneres
           const genreRes = await fetch(
             `https://api.themoviedb.org/3/movie/${peli.id}?language=en-US`,
             datosPelis
@@ -139,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const genreData = await genreRes.json()
           peli.genereId = genreData.genres?.map(g => g.name).join(", ") || ''
 
-          // Obtener actores
+          // Obtenir actors
           const actores = await fetch(
             `https://api.themoviedb.org/3/movie/${peli.id}/credits?language=en-US`,
             datosPelis
@@ -148,8 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
           peli.actores = actoresData.cast?.slice(0, 3).map(actor => actor.name).join(", ") || ''
 
         } catch (err) {
-          console.error("Error al obtener datos adicionales:", err)
-          // Asignamos valores por defecto si hay error
+          console.error("Error en obtenir dades addicionals:", err)
+          // Valors per defecte en cas d'error
           peli.imdb_id = peli.imdb_id || null
           peli.genereId = peli.genereId || 'No disponible'
           peli.actores = peli.actores || 'No disponible'
@@ -158,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return data
 
     } catch (err) {
-      console.error("Error al obtener películas:", err)
+      console.error("Error en obtenir pel·lícules:", err)
       return { results: [] }
     }
   }
